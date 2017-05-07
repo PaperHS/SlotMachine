@@ -7,6 +7,8 @@ import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView msg;
     private ImageView img1, img2, img3;
     private ImageView img11, img21, img31;
-    private Wheel wheel1, wheel2, wheel3;
     private Button btn;
     private boolean isStarted;
     int pos1,pos2,pos3;
@@ -54,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 }else animator.start();
             }
         });
+        Animation a = AnimationUtils.loadAnimation(this,R.anim.anim_top_out);
+
+
         btn.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override public void onGlobalLayout() {
                 btn.getViewTreeObserver().removeOnGlobalLayoutListener(this);
@@ -66,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                 img11.setImageResource(imgs[pos11]);
                 img21.setImageResource(imgs[pos21]);
                 img31.setImageResource(imgs[pos31]);
-
                 animator = ValueAnimator.ofInt(0,height);
                 animator.setInterpolator(new LinearInterpolator());
                 animator.setDuration(8);
